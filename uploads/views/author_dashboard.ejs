@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Author Dashboard</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Author Dashboard</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+</head>
+<body>
+
+    <div class="content">
+        <h2 class="text-center"><i class="fas fa-user-circle icon-blue"></i> Welcome, <%= author.name %>!</h2>
+        <p class="text-center text-muted">
+            <i class="fas fa-id-badge"></i> Your Login ID: <strong><%= author.loginId %></strong>
+        </p>
+    
+        <hr>
+    
+        <% if (manuscripts.length === 0) { %>
+        <div class="card p-4 shadow-sm">
+            <h4><i class="fas fa-file-upload icon-green"></i> Submit a New Manuscript</h4>
+            <form id="manuscriptForm" enctype="multipart/form-data">
+                <input type="hidden" name="loginId" value="<%= author.loginId %>">
+    
+                <div class="mb-3">
+                    <label class="form-label"><i class="fas fa-heading icon-blue"></i> Title</label>
+                    <input type="text" class="form-control" name="title" required>
+                </div>
+    
+                <div class="mb-3">
+                    <label class="form-label"><i class="fas fa-users icon-green"></i> Authors</label>
+                    <input type="text" class="form-control" name="authors" required>
+                </div>
+    
+                <div class="mb-3">
+                    <label class="form-label"><i class="fas fa-envelope icon-blue"></i> Email</label>
+                    <input type="email" class="form-control" name="email" required>
+                </div>
+    
+                <div class="mb-3">
+                    <label class="form-label"><i class="fas fa-align-left icon-green"></i> Abstract</label>
+                    <textarea class="form-control" id="abstract" name="abstract" rows="3" required oninput="validateWordCount()"></textarea>
+                    <small id="wordCountMessage" class="text-danger"></small>
+                </div>
+    
+                <div class="mb-3">
+                    <label class="form-label">
+                        <i class="fas fa-key icon-blue"></i> Keywords
+                    </label>
+                    <input type="text" class="form-control" name="keywords" id="keywordsInput" required 
+                           placeholder="Enter 4-6 keywords separated by commas">
+                    <small class="text-danger" id="keywordError"></small>
+                </div>
+    
+                <div class="mb-3">
+                    <label class="form-label"><i class="fas fa-file-pdf icon-red"></i> Upload Manuscript (PDF only)</label>
+                    <input type="file" class="form-control" name="file" accept=".pdf" required>
+                </div>
+    
+                <button type="submit" id="submitBtn" class="btn btn-success w-100" disabled>
+                    <i class="fas fa-paper-plane"></i> Submit Paper
+                </button>
+            </form>
+        </div>
+        <% } else { %>
+        <p class="text-success text-center fw-bold">
+            <i class="fas fa-check-circle icon-green"></i> ✅ You have already submitted a manuscript.
+        </p>
+        <% } %>
+    
+        <h3 class="mt-4"><i class="fas fa-folder-open icon-blue"></i> Your Submissions</h3>
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead class="table-dark">
+                    <tr>
+                        <th><i class="fas fa-Id-alt icon-blue"></i> Paper ID</th>
+                        <th><i class="fas fa-file-alt icon-green"></i> Title</th>
+                        <th><i class="fas fa-tasks icon-blue"></i> Status</th>
+                        <!-- <th><i class="fas fa-calendar-alt icon-yellow"></i> Publication Date</th> -->
+                        <th><i class="fas fa-eye icon-blue"></i> View</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% manuscripts.forEach((paper) => { %>
+                    <tr>
+                        <td><%= paper.paperId %></td>
+                        <td><%= paper.title %></td>
+                        <td><%= paper.status %></td>
+                        <!-- <td>Jan, July</td> -->
+                        <td>
+                            <a href="/<%= paper.fileUrl %>" target="_blank" class="btn btn-primary btn-sm">
+                                <i class="fas fa-book-open"></i> View Manuscript
+                            </a>
+                        </td>
+                    </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <!-- Bootstrap & FontAwesome Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
+
+
+
+    <script>
+       document.getElementById("manuscriptForm")?.addEventListener("submit", async function(event) {
+    event.preventDefault(); // Prevent default form submission
+
+    const formData = new FormData(this);
+
+    try {
+        const response = await fetch("/submit", {
+            method: "POST",
+            body: formData
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+            alert(result.message); // ✅ Show success message
+            window.location.href = `/author_dashboard/${formData.get("loginId")}`; // ✅ Redirect only after clicking OK
+        } else {
+            alert("❌ Error: " + result.message); // Show error message if submission fails
+        }
+    } catch (error) {
+        alert("❌ Submission failed. Please try again.");
+    }
+});
+
+        function validateWordCount() {
+    let text = document.getElementById("abstract").value.trim();
+    let words = text.split(/\s+/).filter(word => word.length > 0); // Count valid words
+    let wordCount = words.length;
+    let messageElement = document.getElementById("wordCountMessage");
+
+    if (wordCount < 150) {
+        messageElement.innerHTML = "Minimum 150 words required.";
+        messageElement.classList.add("text-danger");
+    } else if (wordCount > 200) {
+        messageElement.innerHTML = "Maximum 200 words allowed.";
+        messageElement.classList.add("text-danger");
+    } else {
+        messageElement.innerHTML = "Word count: " + wordCount; // Show current word count
+        messageElement.classList.remove("text-danger");
+        messageElement.classList.add("text-success");
+    }
+}
+
+document.getElementById("keywordsInput").addEventListener("input", function () {
+        let keywords = this.value.split(",").map(k => k.trim()).filter(k => k.length > 0);
+        let errorMsg = document.getElementById("keywordError");
+        let submitBtn = document.getElementById("submitBtn");
+
+        if (keywords.length < 4) {
+            errorMsg.textContent = "Please enter at least 4 keywords.";
+            submitBtn.setAttribute("disabled", true);
+        } else if (keywords.length > 6) {
+            errorMsg.textContent = "You can enter a maximum of 6 keywords.";
+            submitBtn.setAttribute("disabled", true);
+        } else {
+            errorMsg.textContent = "";
+            submitBtn.removeAttribute("disabled");
+        }
+    });
+    </script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+<style>
+.icon-blue { color: #007bff !important; }   /* Blue */
+    .icon-green { color: #28a745 !important; }  /* Green */
+    .icon-red { color: #dc3545 !important; }    /* Red */
+    .icon-yellow { color: #ffc107 !important; } /* Yellow */
+</style>
+</html>

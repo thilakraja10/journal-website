@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ICAC Admin Dashboard</title>
+
+  <!-- External Libraries -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background-color: #f4f4f4;
+    }
+    .sidebar {
+      height: 100vh;
+      width: 250px;
+      background-color: #333;
+      color: white;
+      position: fixed;
+      left: 0;
+      top: 0;
+      padding-top: 20px;
+    }
+    .sidebar a {
+      color: white;
+      padding: 10px;
+      text-decoration: none;
+      display: block;
+      font-size: 18px;
+    }
+    .sidebar a:hover {
+      background-color: #575757;
+    }
+    .content {
+      margin-left: 260px;
+      padding: 20px;
+    }
+    .header {
+      background-color: #4CAF50;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    .dashboard-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px;
+      border-radius: 10px;
+      color: white;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      transition: transform 0.2s;
+    }
+    .dashboard-card:hover {
+      transform: scale(1.05);
+    }
+    .dashboard-icon {
+      font-size: 40px;
+    }
+    .bg-primary {
+      background: linear-gradient(135deg, #007bff, #0056b3);
+    }
+    .bg-success {
+      background: linear-gradient(135deg, #28a745, #1e7e34);
+    }
+    .bg-danger {
+      background: linear-gradient(135deg, #dc3545, #a71d2a);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h2 style="text-align: center;">Admin Dashboard</h2>
+    <a href="admin1dasboard.html"><i class="fas fa-tachometer-alt text-info"></i> Dashboard</a>
+    <a href="adminpaperlist1.html"><i class="fas fa-file-alt text-primary"></i> Papers List</a>
+    <a href="adminreview1.html"><i class="fas fa-users text-success"></i> Reviewers List</a>
+    <a href="admincomments1.html"><i class="fas fa-comments text-warning"></i> Reviewer Comments</a>
+    <a href="adminpublication1.html"><i class="fas fa-comments text-warning"></i> Paper publication</a>
+    <a href="adminprofile1.html"><i class="fas fa-cog text-secondary"></i> Settings</a>
+    <a href="admin1login.html"><i class="fas fa-sign-out-alt text-danger"></i> Logout</a>
+</div>
+
+  <!-- Content Area -->
+  <div class="content">
+    <div class="header text-center">
+      <h1><i class="fas fa-tachometer-alt"></i> Welcome to the Admin Dashboard</h1>
+    </div>
+
+    <div class="container mt-5">
+      <h2 class="text-center"><i class="fas fa-chart-line"></i> Dashboard Overview</h2>
+    </div>
+
+    <!-- Stat Cards -->
+    <div class="row text-white">
+        <div class="col-md-4">
+          <div class="card bg-primary text-center"><div class="card-body"><h3 id="reviewerCount">0</h3><p>Reviewers</p></div></div>
+        </div>
+        <div class="col-md-4">
+          <div class="card bg-success text-center"><div class="card-body"><h3 id="authorCount">0</h3><p>Authors</p></div></div>
+        </div>
+        <div class="col-md-4">
+          <div class="card bg-warning text-center"><div class="card-body"><h3 id="publishedCount">0</h3><p>Published</p></div></div>
+        </div>
+      </div>
+      
+         
+      
+      <hr class="my-4" />
+  
+      <div class="row">
+        <div class="col-md-6">
+          <canvas id="summaryChart" height="150"></canvas>
+        </div>
+        <div class="col-md-6">
+          <canvas id="monthlyChart" height="150"></canvas>
+        </div>
+      </div>
+      
+<div class="col-md-6  ">
+    <h4 class="text-center mb-4">Paper Status Overview</h4>
+    <div class="card">
+      <div class="card-body">
+        <!-- <div style="width: 400px; height: 200px;"></div> -->
+        <canvas id="statusChart" ></canvas>
+      </div>
+    </div> 
+  </div>
+      <div class="mt-5">
+        <h4>Submitted Papers</h4>
+        <button onclick="exportToExcel()" class="btn btn-outline-success mb-2">Export to Excel</button>
+        <button onclick="exportToPDF()" class="btn btn-outline-danger mb-2">Export to PDF</button>
+        <table class="table table-bordered" id="paperTable">
+          <thead>
+            <tr><th>ID</th><th>Title</th><th>Author</th><th>Status</th><th>Date</th></tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  
+    <script src="script.js"></script>
+    <script src="chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.5/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="export.js"></script>
+    <!-- jsPDF -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<!-- jsPDF AutoTable plugin -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+
+
+  <!-- JavaScript Logic -->
+  <script>
+   
+
+    fetch('/dashboard-counts_1')
+  .then(res => res.json())
+  .then(data => {
+    document.getElementById('reviewerCount').innerText = data.reviewers;
+    document.getElementById('authorCount').innerText = data.authors;
+    document.getElementById('publishedCount').innerText = data.published;
+  });
+
+  fetch('/papers_1')
+  .then(res => res.json())
+  .then(papers => {
+    const tbody = document.querySelector('#paperTable tbody');
+    tbody.innerHTML = ''; // Clear old rows if any
+    papers.forEach(p => {
+      const row = `<tr>
+        <td>${p.paperId}</td>
+        <td>${p.title}</td>
+        <td>${p.authors}</td>
+        <td>${p.status}</td>
+        <td>${p.submissionDate}</td>
+      </tr>`;
+      tbody.innerHTML += row;
+    });
+  });
+
+  fetch('/dashboard-counts_1')
+  .then(res => res.json())
+  .then(data => {
+    new Chart(document.getElementById('summaryChart'), {
+      type: 'bar',
+      data: {
+        labels: ['Reviewers', 'Authors', 'Published'],
+        datasets: [{
+          label: 'Counts',
+          data: [data.reviewers, data.authors, data.published],
+          backgroundColor: ['#007bff', '#28a745', '#ffc107'],
+          tension: 0.4  // <--- This makes the curve smooth   tension: 0.4  // <--- This makes the curve smooth
+        }]
+      }
+    });
+  });
+
+  fetch('/monthly-stats_1')
+  .then(res => res.json())
+  .then(data => {
+    const labels = data.map(d => `Month ${d.month}`);
+    const values = data.map(d => d.count);
+    new Chart(document.getElementById('monthlyChart'), {
+      type: 'line',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: 'Monthly Submissions',
+          data: values,
+          fill: true,
+          borderColor: '#007bff',
+          backgroundColor: 'rgba(0, 123, 255, 0.2)',
+          tension: 0.4  // <--- This makes the curve smooth
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  });
+
+  function exportToExcel() {
+  const table = document.getElementById("paperTable");
+  const wb = XLSX.utils.table_to_book(table);
+  XLSX.writeFile(wb, "conference_report.xlsx");
+}
+
+
+  window.jsPDF = window.jspdf.jsPDF; // Required for UMD build
+
+  function exportToPDF() {
+    const doc = new jsPDF();
+
+    doc.text("Submitted Papers", 14, 15);
+
+    const rows = [];
+    document.querySelectorAll("#paperTable tbody tr").forEach(row => {
+      const cells = Array.from(row.cells).map(cell => cell.textContent.trim());
+      rows.push(cells);
+    });
+
+    doc.autoTable({
+      head: [['ID', 'Title', 'Author', 'Status', 'Date']],
+      body: rows,
+      startY: 20,
+      theme: 'grid'
+    });
+
+    doc.save("conference_report.pdf");
+  }
+
+  let statusChart;
+
+function createOrUpdateChart(data) {
+  const ctx = document.getElementById('statusChart').getContext('2d');
+
+  const labels = ['submitted', 'Under Review', 'Reviewer Comment', 'Published'];
+  const counts = [
+    data["submitted"] || 0,
+    data["Under Review"] || 0,
+    data["Reviewer Comment"] || 0,
+    data["Published"] || 0
+  ];
+
+  if (statusChart) {
+    statusChart.data.datasets[0].data = counts;
+    statusChart.update();
+  } else {
+    statusChart = new Chart(ctx, {
+      type: 'line', // ← use pie chart here
+      data: {
+        labels: labels,
+        datasets: [{
+          label: 'Paper Status',
+          data: counts,
+          backgroundColor: [
+            '#0d6efd', // Submitted - Blue
+            '#ffc107', // Under Review - Yellow
+            '#17a2b8', // Reviewer Comment - Teal
+            '#28a745'  // Published - Green
+          ],
+          borderColor: '#fff',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'bottom'
+          }
+        }
+      }
+    });
+  }
+}
+
+function fetchStatusCounts() {
+  fetch('/api/status-counts')
+    .then(res => res.json())
+    .then(data => createOrUpdateChart(data));
+}
+
+fetchStatusCounts(); // Initial chart
+setInterval(fetchStatusCounts, 10000); // Live update every 10s
+  </script>
+</body>
+</html>

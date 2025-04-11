@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>IJSRC</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js" defer></script>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f8f9fa;
+        }
+        .login-container {
+            max-width: 400px;
+            width: 100%;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .icon-blue { color: #007bff !important; }   /* Blue */
+    .icon-green { color: #28a745 !important; }  /* Green */
+    .icon-red { color: #dc3545 !important; }    /* Red */
+    .icon-yellow { color: #ffc107 !important; } /* Yellow */
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-4">
+                <div class="login-container text-center">
+                    <h2 class="mb-4 text-primary">Author Login</h2>
+                    <form id="loginForm" onsubmit="loginUser(event)" class="p-4 border rounded shadow-sm">
+                        <div class="mb-3 text-start">
+                            <label for="loginId" class="form-label">
+                                <i class="fa-solid fa-user text-primary icon-yellow"></i> Login ID
+                            </label>
+                            <input type="text" id="loginId" name="loginId" class="form-control" required>
+                        </div>
+                        <div class="mb-3 text-start">
+                            <label for="password" class="form-label">
+                                <i class="fa-solid fa-lock text-primary icon-red"></i> Password
+                            </label>
+                            <div class="input-group">
+                                <input type="password" id="password" name="password" class="form-control" required>
+                                <span class="input-group-text" onclick="togglePassword()">
+                                    <i class="fa-solid fa-eye-slash icon-green" id="eyeIcon"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">
+                            <i class="fa-solid fa-sign-in-alt icon-yellow"></i> Login
+                        </button>
+                    </form>
+                    <p class="mt-3">
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#forgotPasswordModal">
+                            <i class="fa-solid fa-key icon-red"></i> Forgot Password?
+                        </a>
+                    </p>
+                    <p>Don't have an account? 
+                        <a href="authorregis.html"><i class="fa-solid fa-user-plus icon-green"></i> Register here</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Forgot Password Modal -->
+    <div class="modal fade" id="forgotPasswordModal" tabindex="-1" aria-labelledby="forgotPasswordModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="login-container text-center">
+                    <h2 class="mb-4 text-primary">Forgot Password</h2>
+                    <form id="resetForm" onsubmit="resetPassword(event)" class="p-4 border rounded shadow-sm">
+                        <div class="mb-3 text-start">
+                            <label for="forgotEmail" class="form-label">
+                                <i class="fa-solid fa-envelope icon-blue"></i> Email
+                            </label>
+                            <input type="email" id="forgotEmail" name="forgotEmail" class="form-control" required>
+                        </div>
+                        <div class="mb-3 text-start">
+                            <label for="newPassword" class="form-label">
+                                <i class="fa-solid fa-lock icon-red"></i> New Password
+                            </label>
+                            <input type="password" id="newPassword" name="newPassword" class="form-control" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">
+                            <i class="fa-solid fa-unlock icon-green"></i> Reset Password
+                        </button>
+                    </form>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+       async function loginUser(event) {
+    event.preventDefault();
+    const loginId = document.getElementById("loginId").value;
+    const password = document.getElementById("password").value;
+
+    try {
+        const response = await fetch("http://127.0.0.1:3001/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ loginId, password })
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+            alert("Login successful!");
+            localStorage.setItem("loginId", loginId);
+            window.location.href = `/author_dashboard/${loginId}`;
+        } else {
+            alert("Login failed: " + data.message);
+        }
+    } catch (error) {
+        console.error("Login error:", error);
+        alert("Server error. Please try again.");
+    }
+}
+
+async function forgotPassword() {
+    const email = document.getElementById("forgotEmail").value;
+    if (!email) {
+        alert("Please enter your email.");
+        return;
+    }
+
+    try {
+        const response = await fetch("http://127.0.0.1:3001/forgot-password", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email })
+        });
+
+        const data = await response.json();
+        alert(data.message);
+    } catch (error) {
+        console.error("Forgot password error:", error);
+        alert("Server error. Please try again.");
+    }
+}
+
+function togglePassword() {
+    const passwordField = document.getElementById("password");
+    const eyeIcon = document.getElementById("eyeIcon");
+
+    if (passwordField.type === "password") {
+        passwordField.type = "text";
+        eyeIcon.classList.remove("fa-eye-slash");
+        eyeIcon.classList.add("fa-eye");
+    } else {
+        passwordField.type = "password";
+        eyeIcon.classList.remove("fa-eye");
+        eyeIcon.classList.add("fa-eye-slash");
+    }
+}
+async function resetPassword(event) {
+        event.preventDefault();
+
+        const email = document.getElementById("forgotEmail").value;
+        const newPassword = document.getElementById("newPassword").value;
+
+        if (!email || !newPassword) {
+            alert("Please fill in both email and new password.");
+            return;
+        }
+
+        try {
+            const response = await fetch("http://127.0.0.1:3001/reset-password", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email, newPassword })
+            });
+
+            const data = await response.json();
+            alert(data.message);
+
+            if (data.success) {
+                window.location.href = "authorlogin.html"; // Redirect to login after success
+            }
+        } catch (error) {
+            console.error("Reset password error:", error);
+            alert("Server error. Please try again.");
+        }
+    }
+    </script>
+</body>
+</html>

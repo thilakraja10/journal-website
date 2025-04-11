@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IJSRC</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+ 
+</head>
+<body>
+    <div id="header"></div>
+
+
+
+<!-- Bootstrap & FontAwesome Scripts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Flash News Section -->
+<div class="flash-news-container">
+  <!-- <span class="news-label"></span> -->
+  <div class="flash-news">
+      <div class="news-wrapper" id="news-wrapper"></div>
+  </div>
+</div>
+
+<div class="container py-4">
+  <div class="row align-items-center">
+      <!-- Left Content Section -->
+      <div class="col-md-6">
+          <p><i class="fas fa-graduation-cap text-primary"></i> The International Journal of Scientific Research in Computing is a peer-reviewed journal dedicated to advancing state of the art research in computer science and related disciplines. Our mission is to promote excellence in scientific research and technological developments.</p>
+          <p><strong><i class="fas fa-user-tie text-danger"></i> Editor-In-Chief:</strong> Dr. E. Chandra</p>
+          <p><strong><i class="fas fa-user text-success"></i> Editor:</strong> Dr. D. Ramyachitra</p>
+          <button class="btn btn-primary mt-2" onclick="showContent()">
+            <i class="fas fa-users"></i> Associate Editors
+        </button>
+        
+      </div>
+
+      <!-- Right Image Section -->
+      <div class="col-md-6 text-center">
+          <img src="img/Front page_page-0001.jpg" class="img-fluid rounded shadow" alt="Front Page">
+          <p class="mt-2"><i class="fas fa-book-open text-warning"></i> Volume 7 | Issue 1 | January 2025</p>
+      </div>
+  </div>
+</div>
+
+  
+</div>
+
+  <!-- Associate Editors Popup -->
+  <div class="modal fade" id="editorsModal" tabindex="-1" aria-labelledby="editorsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editorsModalLabel">Associate Editors</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <ul class="list-group">
+              <li class="list-group-item">
+                  <i class="fas fa-user-tie text-primary"></i> Dr. R. Porkodi, Professor
+              </li>
+              <li class="list-group-item">
+                  <i class="fas fa-user-graduate text-success"></i> Dr. D. Napoleon, Associate Professor
+              </li>
+              <li class="list-group-item">
+                  <i class="fas fa-user-graduate text-success"></i> Dr. S. Vijayarani, Associate Professor
+              </li>
+              <li class="list-group-item">
+                  <i class="fas fa-user text-info"></i> Dr. K. Geetha, Assistant Professor
+              </li>
+              <li class="list-group-item">
+                  <i class="fas fa-user text-info"></i> Dr. P. B. Pankajavalli, Assistant Professor
+              </li>
+          </ul>
+      </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- University Info -->
+  <div class="container mt-4">
+    <p class="fs-5 text-justify">
+      IJSRC, published by the Department of Computer Science, Bharathiar University is a peer-reviewed, open access journal dedicated to advancements in computing research and innovation. The mission of our journal is to promote the advancement in computing research and the applications by publishing the original contributions in artificial intelligence and machine learning, blockchain technology, digital forensics and ethical hacking, cloud computing and distributed systems, Internet of Things, digital twins, robotics and automation, digital image processing and remote sensing, data mining, computer networks and communication and emerging computational technologies.
+    </p>
+    <!-- <p class="fs-5 text-justify">
+        The Department of Computer Science integrates computer and information sciences with natural sciences and engineering concepts to develop products and services for the benefit of the industry and society.
+    </p> -->
+</div>
+
+
+
+<!-- Featured Topics Section -->
+<div class="container my-5">
+  <h2 class="text-center">
+    <i class="fas fa-book-open text-primary icon-red"></i> Featured Topics
+  </h2>
+
+
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card">
+        <img src="img/ai&ml.jpg" class="card-img-top" alt="AI">
+        <div class="card-body">
+          <h3>Artificial Intelligence & Machine Learning</h3>
+          <p>Artificial Intelligence (AI) and Machine Learning (ML) are revolutionary technologies that enable machines to mimic human intelligence and learn from data. AI encompasses a broad range of applications, from speech recognition to decision-making systems, while ML focuses on developing algorithms that improve automatically through experience. There are three main types of ML: supervised, unsupervised, and reinforcement learning, each catering to different types of data-driven problems. Deep learning, a subset of ML, uses artificial neural networks to process complex patterns and make predictions. These technologies are widely used in industries like healthcare, finance, and automation, improving efficiency and accuracy in various tasks. AI-powered systems such as chatbots and virtual assistants enhance user experiences, while predictive analytics helps in areas like stock market forecasting and medical diagnosis. </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+        <img src="img/cyber-security-background-meuqfzxcg4gdd26s.jpg" class="card-img-top" alt="Cybersecurity">
+        <div class="card-body">
+          <h3>Cybersecurity</h3>
+          <p>Cybersecurity is the practice of protecting computer systems, networks, and data from cyber threats, attacks, and unauthorized access. It involves various security measures, including encryption, firewalls, antivirus software, and multi-factor authentication, to safeguard sensitive information. Cyber threats such as malware, phishing, ransomware, and hacking pose significant risks to individuals and organizations. Ethical hacking and penetration testing help identify vulnerabilities and strengthen security systems. With the rise of cloud computing and IoT, cybersecurity has become more critical in preventing data breaches and cybercrimes. Organizations implement security policies and frameworks like ISO 27001 and NIST to ensure data protection and compliance. Cybersecurity professionals work to detect, prevent, and respond to cyberattacks in real time. AI and machine learning are increasingly being used to enhance threat detection and automated response systems .</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+        <img src="img/datascience.jpg" class="card-img-top" alt="Machine Learning">
+        <div class="card-body">
+          <h3>Data Science & Analytics</h3>
+          <p>Data Science is a multidisciplinary field that uses statistics, programming, and machine learning to analyze and interpret complex data. It involves data collection, preprocessing, exploratory analysis, and predictive modeling to derive meaningful insights. Data Analytics, on the other hand, focuses on examining datasets to identify trends, correlations, and patterns, helping businesses make informed decisions. It includes descriptive, diagnostic, predictive, and prescriptive analytics. Data science emphasizes advanced algorithms and AI-driven predictions, while data analytics focuses on understanding historical data and improving decision-making. These fields are widely used in industries like healthcare, finance, marketing, and e-commerce for optimizing operations and customer experience. Ethical concerns like data privacy and bias remain, necessitating responsible data handling.They are expected to significantly influence the future of automation. </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div id="footer"></div>
+
+<!-- Bootstrap Icons & JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<style>
+  /* General Styles */
+body {
+  font-family: 'Roboto', sans-serif;
+}
+.container {
+    width: 100%;
+   
+    padding-left: 0;
+    padding-right: 0;
+}
+.img-fluid{
+  max-width: 30%;
+}
+.equal-height {
+    display: flex;
+    align-items: stretch; /* Make both divs the same height */
+    justify-content: space-between;
+}
+
+.content, .contents {
+    flex: 1; /* Make both divs take equal width */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Align content vertically */
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Ensure the image is responsive */
+.contents img {
+    max-width: 100%;
+    height:20%;
+}
+
+/* Header Styling */
+
+/* Flash News Section */
+.flash-news-container {
+  /* background: #f8d7da; */
+  padding: 10px;
+  text-align: center;
+  overflow: hidden;
+}
+.flash-news {
+  white-space: nowrap;
+  overflow: hidden;
+}
+.news-wrapper {
+  display: inline-block;
+  animation: news-scroll 25s linear infinite;
+}
+@keyframes news-scroll {
+  from { transform: translateX(100%); }
+  to { transform: translateX(-100%); }
+}
+
+/* Featured Topics */
+.card {
+  border-radius: 10px;
+  transition: transform 0.3s ease-in-out;
+}
+.card:hover {
+  transform: translateY(-5px);
+}
+.card img {
+  max-height: 200px;
+  object-fit: cover;
+}
+@media (max-width: 768px) {
+  .card {
+    margin-bottom: 20px;
+  }
+}
+.card-body p {
+      text-align: justify;
+  }
+  .text-justify {
+        text-align: justify;
+    }
+.contents {
+    padding-left: 30%;
+    
+}
+/* Content section */
+.content p {
+  /* background-color:aqua; */
+    font-size: 19px;
+    color:black;
+    line-height: 1.5;
+}
+.content p1 {
+  /* background-color:aqua; */
+    font-size: 19px;
+    color:black;
+    line-height: 1.5;
+}
+
+/* Button styling */
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    font-size: 16px;
+    padding: 10px;
+    border-radius: 5px;
+    transition: 0.3s;
+    width:150px;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #004085;
+}
+
+/* Associate Editors section */
+#associate-editors {
+    /* background: #e9ecef; */
+    padding: 15px;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+#associate-editors ul {
+    padding-left: 20px;
+}
+
+#associate-editors li {
+    font-size: 15px;
+    color: #555;
+}
+
+
+.mt-2 p {
+  
+  margin-top: 15px;
+    font-size: 1.2rem;
+    color: #333;
+  
+}
+/* Responsive Design */
+@media (max-width: 768px) {
+    .content {
+        text-align: center;
+    }
+    
+    .btn-primary {
+        width: 100%;
+    }
+    
+    #associate-editors {
+        text-align: left;
+    }
+}
+
+
+
+/* Associate Editors Modal */
+.modal-content {
+  border-radius: 10px;
+}
+.modal-header {
+  background-color: #007bff;
+  color: white;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+.modal-body {
+  padding: 20px;
+}
+
+/* List Styling */
+.list-group-item {
+  border: none;
+  font-weight: 500;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .content {
+    text-align: center;
+  }
+}
+
+
+
+/* Footer */
+
+.content p-3 p {
+  font-size: 30px;
+  font-weight: 300;
+  line-height: 1.6;
+}
+
+  .mt-4 {
+    margin-top: 1.5rem !important;
+}
+
+p {
+    font-size: 1rem;
+    line-height: 1.6;
+    
+}
+
+/* Responsive styling */
+@media (max-width: 768px) {
+    p {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 576px) {
+    p {
+        font-size: 0.85rem;
+    }
+
+    .content1 img ,p1{
+    margin-left: 10px!important;
+  }  
+
+}
+
+  .content1 img ,p1{
+    margin-left: 400px;
+  }         
+        
+   .content1 p1{
+    margin-left: 350px;
+    font-size:16px;
+   }     
+        .equal-height {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            font-size: 19px;
+        
+        }
+        .container7 {
+          background-color:lavender;
+        }
+    
+</style>
+<script>
+  function toggleSearchBox() {
+      const searchInput = document.getElementById("search-input");
+      // Toggle the 'active' class to show or hide the input
+      if (searchInput.classList.contains("active")) {
+        searchInput.classList.remove("active");
+        searchInput.style.display = "none";
+      } else {
+        searchInput.classList.add("active");
+        searchInput.style.display = "block";
+        searchInput.focus(); // Automatically focus on the input
+      }
+    }
+    const suggestions = [
+      "JavaScript",
+      "HTML",
+      "CSS",
+      "React",
+      "Angular",
+      "Vue",
+      "Node.js",
+      "Python",
+      "Machine Learning",
+      "Artificial Intelligence"
+    ];
+
+    // Function to show suggestions
+    function showSuggestions(input) {
+      const suggestionList = document.getElementById("suggestion-list");
+      suggestionList.innerHTML = ""; // Clear previous suggestions
+
+      if (input.trim() === "") {
+        suggestionList.style.display = "none";
+        return;
+      }
+
+      const filteredSuggestions = suggestions.filter((item) =>
+        item.toLowerCase().includes(input.toLowerCase())
+      );
+
+      if (filteredSuggestions.length === 0) {
+        suggestionList.style.display = "none";
+        return;
+      }
+
+      filteredSuggestions.forEach((suggestion) => {
+        const listItem = document.createElement("li");
+        listItem.textContent = suggestion;
+        listItem.onclick = () => selectSuggestion(suggestion);
+        suggestionList.appendChild(listItem);
+      });
+
+      suggestionList.style.display = "block";
+    }
+
+    // Function to handle suggestion selection
+    function selectSuggestion(suggestion) {
+      const searchInput = document.querySelector(".search-input");
+      searchInput.value = suggestion;
+      document.getElementById("suggestion-list").style.display = "none";
+    }
+    // Array of Flash News Updates
+    const newsItems = [
+    "Paper Submission Starts Through Online Submission",
+    "Call For Papers: Submission Starts From 1st January 2025",
+    "Author Notification: 31st May 2025",
+    'Conference Link : <a href="home1.html" target="_blank">International Conference on Advanced Computing 2025</a>'
+];
+
+// Add a pipe `|` after each item except the last one
+
+
+    const newsWrapper = document.getElementById('news-wrapper');
+
+    function updateFlashNews() {
+        newsWrapper.innerHTML = ""; // Clear previous content
+
+        newsItems.forEach(news => {
+            const span = document.createElement("span");
+            span.classList.add("news-text");
+            span.innerHTML = news;
+            newsWrapper.appendChild(span);
+        });
+    }
+
+    updateFlashNews(); // Initialize news content
+    const formattedNews = newsItems.map(item => item + " | ").join(" ");
+    
+
+    document.getElementById('news-wrapper').innerHTML = newsItems
+    .map((item, index) => index < newsItems.length - 1 ? item + " | " : item)
+    .join(" ");
+
+    let currentIndex = 0;
+
+    function showSlide(index) {
+        const slider = document.querySelector('.slider');
+        const slides = document.querySelectorAll('.slide');
+        if (index >= slides.length) {
+            currentIndex = 0;
+        } else if (index < 0) {
+            currentIndex = slides.length - 1;
+        } else {
+            currentIndex = index;
+        }
+        slider.style.transform = `translateX(-${currentIndex * 100}%)`;
+    }
+
+    function nextSlide() {
+        showSlide(currentIndex + 1);
+    }
+
+    function prevSlide() {
+        showSlide(currentIndex - 1);
+    }
+
+    // Auto slide every 3 seconds
+    setInterval(() => {
+        nextSlide();
+    }, 4000);
+    function showContent() {
+            document.getElementById('halfContent').classList.add('active');
+        }
+
+        function hideContent() {
+            document.getElementById('halfContent').classList.remove('active');
+        }
+        function showContent() {
+        document.getElementById("halfContent").style.display = "block";
+    }
+    
+    function hideContent() {
+        document.getElementById("halfContent").style.display = "none";
+    }
+    
+  function showContent() {
+    var modal = new bootstrap.Modal(document.getElementById('editorsModal'));
+    modal.show();
+  }
+// Load header and footer using fetch
+fetch('/header')
+        .then(response => response.text())
+        .then(data => document.getElementById('header').innerHTML = data)
+        .catch(error => console.error('Error loading header:', error));
+
+    fetch('/footer')
+        .then(response => response.text())
+        .then(data => document.getElementById('footer').innerHTML = data)
+        .catch(error => console.error('Error loading footer:', error));
+
+</script>
+</body>
+</html>

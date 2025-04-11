@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reviewer Dashboard</title>
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+        }
+        .paper-card {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .status-buttons .btn {
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2 class="text-center">Reviewer Dashboard</h2>
+    <h3 class="text-center text-primary">Welcome, <span id="reviewerName">Loading...</span>!</h3>
+    
+
+        <div class="container mt-4">
+        
+            <div class="container my-5">
+                
+                <table class="table table-bordered mt-3">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Paper ID</th>
+                            <th>Title</th>
+                            <th>Authors</th>
+                            <th>Download Manuscript</th>
+                  
+                            <th>Add comments</th>
+                           
+                        </tr>
+                    </thead>
+                    <tbody id="paperTableBody"></tbody>
+                </table>
+            </div>
+        </div>
+
+       
+    </div>
+
+    <script>
+
+let reviewer = JSON.parse(localStorage.getItem("reviewer"));
+        // 🔹 Fetch Assigned Papers
+        document.getElementById("reviewerName").innerText = reviewer.name;
+        window.onload = function() {
+            fetch(`http://127.0.0.1:3001/assigned-papers_1?name=${reviewer.name}`, {
+        method: "GET",
+        headers: { "Content-Type": "application/json" }
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Fetched Assigned Papers:", data);
+
+        let paperTable = document.getElementById("paperTableBody");
+        paperTable.innerHTML = "";
+
+        if (!data.papers || data.papers.length === 0) {
+            document.getElementById("paperTable").innerHTML = `
+                <tr>
+                    <td colspan="7" class="text-center text-muted">No papers assigned.</td>
+                </tr>`;
+            return;
+        }
+
+        data.papers.forEach((paper, index) => {
+            let row = `
+                <tr>
+                    <td>${paper.paperId}</td>
+                    <td>${paper.title}</td>
+                    <td>${paper.authors}</td>
+                   
+                    <td><a href="${paper.fileUrl}" download class="btn btn-primary btn-sm">Download</a></td>
+                   
+            
+                    <td><a href="test2.html?paperId=${paper.paperId}"  class="btn btn-primary btn-sm">Reviwer Comment</a></td>
+                    
+                </tr>
+            `;
+            paperTable.innerHTML += row;
+        });
+    })
+    .catch(error => {
+        console.error("Error fetching papers:", error);
+        document.getElementById("paperTableBody").innerHTML = `
+            <tr>
+                <td colspan="7" class="text-center text-danger">⚠️ Failed to load papers. Please try again later.</td>
+            </tr>`;
+    });
+};
+        // 🔹 Update Status
+        function updateStatus(index, status) {
+    let statusBadge = document.getElementById(`status-${index}`);
+    statusBadge.innerText = status;
+    statusBadge.className = `badge bg-${status === 'Accepted' ? 'success' : 'warning'}`;
+}
+
+// 🔹 Set Comment from Dropdown
+function setComment(index, comment) {
+    let inputBox = document.getElementById(`comment-${index}`);
+    inputBox.value = comment;
+}
+
+// 🔹 Save Comments & Status
+async function saveData() {
+    let paperCards = document.querySelectorAll(".paper-card");
+    let data = Array.from(paperCards).map((card, index) => ({
+        title: card.querySelector("h5").innerText,
+        status: document.getElementById(`status-${index}`).innerText.trim(),
+        comments: document.getElementById(`comment-${index}`).value
+    }));
+
+    try {
+        let response = await fetch(" http://127.0.0.1:3001/save-comments_1", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ papers: data })
+        });
+
+        if (response.ok) {
+            alert("✅ Comments and Status Saved Successfully!");
+        } else {
+            throw new Error("Failed to save data");
+        }
+    } catch (error) {
+        console.error("❌ Error saving data:", error);
+        alert("❌ Error saving data. Please try again.");
+    }
+}
+    </script>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

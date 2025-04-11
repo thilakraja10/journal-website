@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ICAC 2025 Registration Form</title>
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    
+    <style>
+        body {
+            background-color: #e3f2fd;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+            max-width: 600px;
+            width: 100%;
+        }
+
+        h2 {
+            text-align: center;
+            color: #4CAF50;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            transition: border 0.3s ease;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            border-color: #4CAF50;
+            outline: none;
+            box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            padding: 12px;
+            width: 100%;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #result {
+            margin-top: 15px;
+            text-align: center;
+            font-weight: bold;
+            color: #28a745;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>ICAC 2025 Registration Form</h2>
+    
+        <form id="registrationForm" enctype="multipart/form-data" method="POST" action="/conregister">
+  <!-- Paper ID -->
+            <div class="mb-3">
+                <label for="paperId">Paper ID:</label>
+                <input type="text" id="paperId" name="paperId" required>
+                <span id="paperIdError" style="color: red; display: none;">Paper ID not found!</span>
+            </div>
+            <!-- Name -->
+            <div class="mb-3">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+    
+            <!-- Gender -->
+            <div class="mb-3">
+                <label for="gender">Gender:</label>
+                <select id="gender" name="gender" required>
+                    <option value="">Select Gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Transgender">Transgender</option>
+                </select>
+            </div>
+    
+            <!-- Designation -->
+            <div class="mb-3">
+                <label for="designation">Designation:</label>
+                <input type="text" id="designation" name="designation" required>
+            </div>
+    
+            <!-- Organization -->
+            <div class="mb-3">
+                <label for="organization">Organization/Institution:</label>
+                <input type="text" id="organization" name="organization" required>
+            </div>
+    
+            <!-- Postal Address -->
+            <div class="mb-3">
+                <label for="address">Postal Address:</label>
+                <textarea id="address" name="address" rows="3" required></textarea>
+            </div>
+    
+            <!-- Email -->
+            <div class="mb-3">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+    
+            <!-- Mobile Number -->
+            <div class="mb-3">
+                <label for="mobile">Mobile Number:</label>
+                <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" required>
+            </div>
+    
+            <!-- Role -->
+            <div class="mb-3">
+                <label for="role">Role:</label>
+                <select id="role" name="role" required>
+                    <option value="">Select Role</option>
+                    <option value="Presenter">Presenter</option>
+                    <option value="Participant">Participant</option>
+                </select>
+            </div>
+    
+            <!-- Paper Title -->
+            <div class="mb-3">
+                <label for="paperTitle">Paper Title:</label>
+                <input type="text" id="title" name="title" required>
+            </div>
+    
+            <!-- Paper ID -->
+         
+            <!-- Registration Fee -->
+            <div class="mb-3">
+                <label for="registrationFee">Registration Fee:</label>
+                <input type="number" id="registrationFee" name="registrationFee" required>
+            </div>
+    
+            <!-- Payment Method -->
+            <div class="mb-3">
+                <label for="paymentMethod">Payment Method:</label>
+                <select id="paymentMethod" name="paymentMethod" required>
+                    <option value="">Select Payment Type</option>
+                    <option value="Online">Online</option>
+                    <option value="Offline">Offline</option>
+                </select>
+            </div>
+    
+            <!-- Transaction ID -->
+            <div class="mb-3">
+                <label for="transactionId">Transaction ID:</label>
+                <input type="text" id="transactionId" name="transactionId" required>
+            </div>
+    
+            <!-- Payment Date -->
+            <div class="mb-3">
+                <label for="paymentDate">Payment Date:</label>
+                <input type="date" id="paymentDate" name="paymentDate" required>
+            </div>
+    
+            <!-- Place -->
+            <div class="mb-3">
+                <label for="place">Place:</label>
+                <input type="text" id="place" name="place" required>
+            </div>
+    
+            <!-- Date -->
+            <div class="mb-3">
+                <label for="date">Date:</label>
+                <input type="date" id="date" name="date" required>
+            </div>
+    
+            <!-- Signature Upload -->
+            <div class="mb-3">
+                <label for="signature">Signature of Presenter/Participant:</label>
+                <input type="file" id="signature" name="signature" accept=".jpg, .jpeg, .png, .pdf" required>
+            </div>
+    
+            <!-- Submit Button -->
+            <button type="submit" id="submitBtn" disabled>Submit</button>
+    
+        </form>
+    
+        <div id="result"></div>
+    </div>
+
+<!-- JS for form submission -->
+<script>
+ document.getElementById('registrationForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const formData = new FormData(this);
+
+            try {
+                const response = await fetch('http://127.0.0.1:3001/conregister', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    throw new Error(`Server Error: ${errorText}`);
+                }
+
+                const result = await response.json();
+
+                if (result.pdfPath) {
+                    alert('✅ Registration Successful! Downloading receipt...');
+                    const downloadLink = document.createElement('a');
+                    downloadLink.href = result.pdfPath;
+                    downloadLink.download = 'ICAC2025_Receipt.pdf';
+                    document.body.appendChild(downloadLink);
+                    downloadLink.click();
+                    document.body.removeChild(downloadLink);
+                } else {
+                    alert('❌ Error: ' + (result.message || 'Unknown error'));
+                }
+            } catch (error) {
+                console.error('❌ Error:', error);
+                alert(`❌ Error occurred: ${error.message}`);
+            }
+        });
+document.addEventListener("DOMContentLoaded", function () {
+        let today = new Date().toISOString().split('T')[0];
+        document.getElementById("paymentDate").setAttribute("max", today);
+    });
+    document.addEventListener("DOMContentLoaded", function () {
+        let today = new Date().toISOString().split('T')[0];
+        document.getElementById("date").value = today; // Set default value to today's date
+    });
+
+    document.getElementById("paperId").addEventListener("input", function () {
+    let paperId = this.value;
+    let errorMsg = document.getElementById("paperIdError");
+    let submitBtn = document.getElementById("submitBtn");
+
+    if (paperId.length > 0) {
+        fetch(`/check-paper-id?paperId=${paperId}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.exists) {
+                    errorMsg.style.display = "none";
+                    submitBtn.removeAttribute("disabled");
+
+                    document.getElementById("name").value = data.name;
+                    document.getElementById("email").value = data.email;
+                    document.getElementById("phone").value = data.phone;
+                    document.getElementById("gender").value = data.gender;
+                    document.getElementById("organization").value = data.organization;
+                    document.getElementById("title").value = data.title;
+                } else {
+                    errorMsg.style.display = "inline";
+                    submitBtn.setAttribute("disabled", true);
+
+                    document.getElementById("name").value = "";
+                    document.getElementById("email").value = "";
+                    document.getElementById("phone").value = "";
+                    document.getElementById("gender").value = "";
+                    document.getElementById("organization").value = "";
+                    document.getElementById("title").value = "";
+                }
+            })
+            .catch(error => {
+                console.error("Error checking Paper ID:", error);
+            });
+    } else {
+        errorMsg.style.display = "none";
+        submitBtn.setAttribute("disabled", true);
+    }
+});
+</script>
+
+</body>
+</html>

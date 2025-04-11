@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IJSRC</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+</head>
+<body>
+
+    <div class="container">
+        <div class="form-card">
+            <!-- Login Form -->
+            <div id="loginFormContainer">
+                <h2 class="text-center"><i class="fas fa-user-circle"></i> Reviewer Login</h2>
+                <form id="loginForm">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text icon-blue"><i class="fas fa-envelope"></i></span>
+                        <input type="email" id="loginEmail" class="form-control" placeholder="Email" required>
+                    </div>
+    
+                    <div class="input-group mb-3">
+                        <span class="input-group-text icon-red"><i class="fas fa-lock"></i></span>
+                        <input type="password" id="loginPassword" class="form-control" placeholder="Password" required>
+                    </div>
+    
+                    <button type="submit" class="btn btn-primary w-100"><i class="fas fa-sign-in-alt"></i> Login</button>
+                    <p class="mt-3 text-center">New User? <a href="#" onclick="showRegisterForm()">Register Here</a></p>
+                </form>
+            </div>
+    
+            <!-- Registration Form -->
+            <div id="registerFormContainer" class="d-none">
+                <h2 class="text-center"><i class="fas fa-user-plus"></i> Reviewer Registration</h2>
+                <form id="registerForm">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text icon-green"><i class="fas fa-user"></i></span>
+                        <input type="text" id="registerName" class="form-control" placeholder="Full Name" required>
+                    </div>
+    
+                    <div class="input-group mb-3">
+                        <span class="input-group-text icon-blue"><i class="fas fa-envelope"></i></span>
+                        <input type="email" id="registerEmail" class="form-control" placeholder="Email" required>
+                    </div>
+    
+                    <div class="input-group mb-3">
+                        <span class="input-group-text icon-red"><i class="fas fa-lock"></i></span>
+                        <input type="password" id="registerPassword" class="form-control" placeholder="New Password" required>
+                    </div>
+    
+                    <div class="input-group mb-3">
+                        <span class="input-group-text icon-red"><i class="fas fa-lock"></i></span>
+                        <input type="password" id="confirmPassword" class="form-control" placeholder="Confirm Password" required>
+                    </div>
+    
+                    <button type="submit" class="btn btn-success w-100"><i class="fas fa-user-check"></i> Register</button>
+                    <p class="mt-3 text-center">Already have an account? <a href="#" onclick="showLoginForm()">Login Here</a></p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+<script>
+   // Registration
+document.getElementById("registerForm").addEventListener("submit", async function (event) {
+    event.preventDefault();
+
+    let name = document.getElementById("registerName").value.trim();
+    let email = document.getElementById("registerEmail").value.trim();
+    let password = document.getElementById("registerPassword").value;
+    let confirmPassword = document.getElementById("confirmPassword").value;
+
+    if (password !== confirmPassword) {
+        alert("Passwords do not match!");
+        return;
+    }
+
+    let response = await fetch(" http://127.0.0.1:3001/reviewer5-register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, password })
+    });
+
+    let result = await response.json();
+    alert(result.message);
+    if (response.ok) showLoginForm();
+});
+
+// Login
+document.getElementById("loginForm").addEventListener("submit", async function (event) {
+    event.preventDefault();
+
+    let email = document.getElementById("loginEmail").value.trim();
+    let password = document.getElementById("loginPassword").value;
+
+    let response = await fetch(" http://127.0.0.1:3001/reviewer5-login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password })
+    });
+
+    let result = await response.json();
+    alert(result.message);
+
+    if (response.ok) {
+        localStorage.setItem("reviewer", JSON.stringify(result.reviewer));
+        localStorage.setItem("token", result.token);
+        window.location.href = "reviwerdasbord.html"; // Redirect to reviewer dashboard
+    }
+});
+function showRegisterForm() {
+            document.getElementById("loginFormContainer").classList.add("d-none");
+            document.getElementById("registerFormContainer").classList.remove("d-none");
+        }
+
+        // Function to show the login form and hide the register form
+        function showLoginForm() {
+            document.getElementById("registerFormContainer").classList.add("d-none");
+            document.getElementById("loginFormContainer").classList.remove("d-none");
+        }
+</script>
+
+</body>
+<style>
+    .icon-blue { color: #007bff !important; }   /* Blue */
+    .icon-green { color: #28a745 !important; }  /* Green */
+    .icon-red { color: #dc3545 !important; }    /* Red */
+    .icon-yellow { color: #ffc107 !important; } /* Yellow */
+
+
+    .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Card Styling */
+        .form-card {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    width: 100%;
+    padding: 20px;  /* Adjust padding inside the form */
+}
+
+        /* Input Group Styling */
+        .input-group-text {
+            background-color: white;
+            color: white;
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+        }
+
+        .btn-success {
+            background-color: #28a745;
+            border: none;
+        }
+</style>
+</html>

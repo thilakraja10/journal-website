@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Reviewer Dashboard</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"/>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+        }
+    </style>
+</head>
+<body>
+
+    <h2 class="text-center mt-3">Reviewer Dashboard</h2>
+    <h3 class="text-center text-primary">Welcome, <span id="reviewerName">Loading...</span>!</h3>
+
+    <div class="container mt-5">
+        <table class="table table-bordered" id="paperTable">
+            <thead class="table-dark">
+                <tr>
+                    <th>Paper ID</th>
+                    <th>Title</th>
+                    <th>Authors</th>
+                    <th>Download Manuscript</th>
+                    <th>Add Comments</th>
+                    <th id="actionHeader">Action</th>
+                </tr>
+            </thead>
+            <tbody id="paperTableBody"></tbody>
+        </table>
+    </div>
+
+    <script>
+        const reviewer = JSON.parse(localStorage.getItem("reviewer"));
+        document.getElementById("reviewerName").innerText = reviewer?.name || "Reviewer";
+
+        window.onload = function () {
+            fetch(`http://127.0.0.1:3001/assigned-papers?name=${reviewer.name}`, {
+                method: "GET",
+                headers: { "Content-Type": "application/json" }
+            })
+            .then(response => response.json())
+            .then(data => {
+                const tableBody = document.getElementById("paperTableBody");
+                tableBody.innerHTML = "";
+
+                let showAction = false;
+
+                if (!data.papers || data.papers.length === 0) {
+                    tableBody.innerHTML = `
+                        <tr>
+                            <td colspan="6" class="text-center text-muted">No papers assigned.</td>
+                        </tr>`;
+                    return;
+                }
+
+                data.papers.forEach(paper => {
+                    const isVerified = localStorage.getItem(`verified-${paper.paperId}`) === "true";
+if (isVerified) showAction = true;
+
+const commentBtn = isVerified
+    ? `<button class="btn btn-sm btn-secondary" disabled>Reviewer Comment</button>`
+    : `<a href="test.html?paperId=${paper.paperId}" class="btn btn-sm btn-secondary">Reviewer Comment</a>`;
+
+const row = document.createElement("tr");
+row.innerHTML = `
+    <td>${paper.paperId}</td>
+    <td>${paper.title}</td>
+    <td>${paper.authors}</td>
+    <td><a href="${paper.fileUrl}" download class="btn btn-primary btn-sm">Download</a></td>
+    <td>${commentBtn}</td>
+    <td class="action-cell">${isVerified ? '<span class="badge bg-success">Verified</span>' : ''}</td>
+`;
+tableBody.appendChild(row);
+                });
+
+                // Handle hiding/showing Action column
+                if (!showAction) {
+                    document.getElementById("actionHeader").style.display = "none";
+                    document.querySelectorAll(".action-cell").forEach(cell => {
+                        cell.style.display = "none";
+                    });
+                }
+            })
+            .catch(error => {
+                console.error("Error fetching papers:", error);
+                document.getElementById("paperTableBody").innerHTML = `
+                    <tr>
+                        <td colspan="6" class="text-center text-danger">⚠️ Failed to load papers. Please try again later.</td>
+                    </tr>`;
+            });
+        };
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

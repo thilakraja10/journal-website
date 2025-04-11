@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>IJSRC - International Journal of Scientific Research in Computing</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        /* Header Styling */
+        header {
+            position: relative;
+            text-align: center;
+            padding: 20px;
+            background-color: white;
+            color: #000;
+        }
+
+        .logo, .logo1 {
+            position: absolute;
+            top: 30px;
+            height: 150px;
+            padding-top: 50px;
+        }
+
+        .logo {
+            left: 20px;
+        }
+
+        .logo1 {
+            right: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .logo, .logo1 {
+                height: 80px;
+            }
+
+            header h1 {
+                font-size: 20px;
+            }
+
+            header h2, header h3 {
+                font-size: 16px;
+            }
+        }
+
+        /* Navbar Customization */
+        .navbar-nav .nav-link {
+            font-weight: 600;
+            color: black !important;
+        }
+
+        .navbar-toggler {
+            border: none;
+        }
+
+        @media (max-width: 992px) {
+            .navbar-nav {
+                text-align: center;
+            }
+        }
+
+        /* Footer Styling */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #f8f9fa;
+            color: #000;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        .nav-link {
+            color: #000;
+            font-size: 18px;
+            margin-right: 20px;
+        }
+
+        /* Responsive Text Styling */
+        p {
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            p {
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            p {
+                font-size: 0.85rem;
+            }
+        }
+
+        /* Dropdown Item Styling */
+        .dropdown-item i {
+            margin-right: 8px;
+        }
+
+        /* Icon Colors */
+        .icon-blue { color: #007bff !important; }   /* Blue */
+        .icon-green { color: #28a745 !important; }  /* Green */
+        .icon-red { color: #dc3545 !important; }    /* Red */
+        .icon-yellow { color: #ffc107 !important; } /* Yellow */
+    </style>
+</head>
+<body>
+
+<!-- Header Section -->
+<header>
+    <img src="img/logo1.png" alt="Left Logo" class="logo">
+    <img src="img/logo-removebg-preview.png" alt="Right Logo" class="logo1">
+    <h1>International Journal of Scientific Research in Computing</h1>
+    <h2>Department of Computer Science</h2>
+    <h2>Bharathiar University</h2>
+    <h3>Coimbatore-641046</h3>
+</header>
+
+<!-- Navbar Section -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light shadow">
+    <div class="container">
+        <!-- Navbar Brand -->
+        <a class="navbar-brand fw-bold text-primary" href="#">
+            <i class="fas fa-book text-danger"></i> IJSRC
+        </a>
+
+        <!-- Navbar Toggler -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Navbar Links -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                
+                <!-- Home -->
+                <li class="nav-item">
+                    <a class="nav-link" href="home.html">
+                        <i class="fas fa-home text-primary"></i> Home
+                    </a>
+                </li>
+
+                <!-- Archives Dropdown -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="archivesDropdown" role="button" data-bs-toggle="dropdown">
+                        <i class="fas fa-archive text-success"></i> Archives
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="latestissues.html"><i class="fas fa-newspaper text-info"></i> current Issue</a></li>
+                        <li><a class="dropdown-item" href="Allisusse.html"><i class="fas fa-book-open text-warning"></i> Past Issue</a></li>
+                    </ul>
+                </li>
+
+                <!-- Submission Manuscript Dropdown -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="submissionDropdown" role="button" data-bs-toggle="dropdown">
+                        <i class="fas fa-file-upload text-danger"></i> Manuscript Submission
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="manuscript preparation.html"><i class="fas fa-pencil-alt text-primary"></i> Manuscript Preparation</a></li>
+                        <li><a class="dropdown-item" href="submissiongudie.html"><i class="fas fa-info-circle text-secondary"></i> Submission Guidelines</a></li>
+                        <li><a class="dropdown-item" href="authorlogin.html"><i class="fas fa-user-edit text-success"></i> Submission Link</a></li>
+                        <li><a class="dropdown-item" href="processhome.html"><i class="fas fa-tasks text-warning"></i> Review & Publication Process</a></li>
+                    </ul>
+                </li>
+
+                <!-- Login Dropdown -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-primary fw-bold" href="#" id="loginDropdown" role="button" data-bs-toggle="dropdown">
+                        <i class="fas fa-sign-in-alt text-dark"></i> Login
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="loginDropdown">
+                        <li><a class="dropdown-item" href="authorlogin.html"><i class="fas fa-user text-success"></i> Author Login</a></li>
+                        <li><a class="dropdown-item" href="adminlogin.html"><i class="fas fa-user-shield text-danger"></i> Admin Login</a></li>
+                        <li><a class="dropdown-item" href="rewlogin.html"><i class="fas fa-user-check text-info"></i> Reviewer Login</a></li>
+                    </ul>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

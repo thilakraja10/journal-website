@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>IJSRC</title>
+    <!-- Bootstrap CSS --> 
+     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f8f9fa;
+        }
+        .login-container {
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .icon-blue { color: #007bff !important; }   /* Blue */
+    .icon-green { color: #28a745 !important; }  /* Green */
+    .icon-red { color: #dc3545 !important; }    /* Red */
+    .icon-yellow { color: #ffc107 !important; } /* Yellow */
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-4">
+                <div class="login-container text-center">
+                    <h2 class="mb-4">Admin Login</h2>
+                    <form action="/login1" method="POST">
+                        <div class="mb-3 text-start">
+                            <label for="username" class="form-label">
+                                <i class="fas fa-user icon-blue"></i> Username
+                            </label>
+                            <input type="text" id="username" name="username" class="form-control" required>
+                        </div>
+    
+                        <div class="mb-3 text-start">
+                            <label for="password" class="form-label">
+                                <i class="fas fa-lock icon-red"></i> Password
+                            </label>
+                            <input type="password" id="password" name="password" class="form-control" required>
+                        </div>
+    
+                        <button type="submit" class="btn btn-primary w-100">
+                            <i class="fas fa-sign-in-alt"></i> Login
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+    const form = document.querySelector("form");
+    const usernameInput = document.getElementById("username");
+    const passwordInput = document.getElementById("password");
+
+    form.addEventListener("submit", function (event) {
+        event.preventDefault(); // Prevent default form submission
+
+        const username = usernameInput.value.trim();
+        const password = passwordInput.value.trim();
+
+        // Remove previous error messages
+        document.querySelectorAll(".error-message").forEach(el => el.remove());
+        usernameInput.classList.remove("border-danger");
+        passwordInput.classList.remove("border-danger");
+
+        // Validation
+        if (username === "" || password === "") {
+            if (username === "") showError(usernameInput, "Username is required");
+            if (password === "") showError(passwordInput, "Password is required");
+            return;
+        }
+
+        // Check hardcoded credentials
+        if (username === "IJSRC@AD" && password === "ijsrcad001") {
+            alert("Login successful!");
+            window.location.href = "admindasborad.html"; // Redirect to dashboard
+        } else {
+            showError(usernameInput, "Invalid username or password");
+            showError(passwordInput, "Invalid username or password");
+        }
+    });
+
+    function showError(input, message) {
+        const errorDiv = document.createElement("div");
+        errorDiv.className = "error-message text-danger mt-1";
+        errorDiv.innerText = message;
+        input.classList.add("border-danger");
+        input.parentElement.appendChild(errorDiv);
+    }
+});
+
+</script>
+</html>

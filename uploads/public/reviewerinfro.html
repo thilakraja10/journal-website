@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reviewer Comments</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <!-- Bootstrap JS (Optional for interactive components) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <style>
+        .icon-color-primary { color: #0d6efd; }  /* Primary Blue */
+        .icon-color-warning { color: #ffc107; }   /* Warning Yellow */
+        .icon-color-danger  { color: #dc3545; }   /* Danger Red */
+        .icon-color-success { color: #198754; }   /* Success Green */
+    </style>
+</head>
+<body class="bg-light">
+
+    <div class="container my-5">
+        <h1 class="text-center mb-4">Reviewer Comments</h1>
+
+        <!-- Comments for Authors -->
+        <div class="card shadow-sm mb-4">
+            <div class="card-header bg-primary text-white">
+                <i class="fas fa-user-edit icon-color-warning"></i> Comments for Authors
+            </div>
+            <div class="card-body">
+                <ul class="list-unstyled">
+                    <li><i class="fas fa-pencil-alt icon-color-primary"></i> Revise introduction: <em>“Identifying and Preventing Threats...”</em></li>
+                    <li><i class="fas fa-pencil-alt icon-color-primary"></i> Reform this sentence: <em>“(MFA), identity verification techniques...”</em></li>
+                    <li><i class="fas fa-book icon-color-success"></i> Adjust reference format in the literature review.</li>
+                    <li><i class="fas fa-question-circle icon-color-warning"></i> Clarify the sentence starting with <em>“As a result of this convergence…”</em></li>
+                    <li><i class="fas fa-ban icon-color-danger"></i> Avoid using “we” in the literature review.</li>
+                    <li><i class="fas fa-calculator icon-color-primary"></i> Correct the accuracy formula with a proper division symbol (<code>/</code>).</li>
+                    <li><i class="fas fa-check-circle icon-color-success"></i> Ensure all references are cited within the text.</li>
+                    <li><i class="fas fa-exclamation-triangle icon-color-warning"></i> Check for overall grammatical mistakes.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Confidential Comments for Editors -->
+        <div class="card shadow-sm">
+            <div class="card-header bg-warning text-dark">
+                <i class="fas fa-user-secret icon-color-danger"></i> Confidential Comments for Editors
+            </div>
+            <div class="card-body">
+                <p>Include any confidential remarks or concerns here.</p>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

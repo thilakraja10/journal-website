@@ -1,0 +1,145 @@
+<!-- Bootstrap CSS (Responsive) -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- FontAwesome for Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+<!-- Header Section -->
+<header class="text-center p-3 bg-light border-bottom position-relative">
+    <h1> International Conference on Advanced Computing </h1>
+    <h2>Department of Computer Science</h2>
+    <h2>Bharathiar University</h2>
+    <h3>Coimbatore-641046</h3>
+    
+    <!-- Logo with Media Queries -->
+    <div class="position-absolute top-0 start-0 mt-1 ms-2"> 
+        <img src="logo1.png" alt="Left Logo" class="custom-logo">
+    </div>
+</header>
+
+<!-- Navigation Bar -->
+<nav class="navbar navbar-expand-lg custom-navbar">
+  <div class="container">
+      <a class="navbar-brand fw-bold" href="#" style="font-family: 'Times New Roman', Times, serif; color: #333;">
+          ICAC 2025
+      </a>
+      <!-- Mobile Toggle Button -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+      <!-- Navigation Links -->
+      <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto gap-2">
+              <li class="nav-item">
+                  <a class="nav-link fw-bold" href="home1.html" 
+                     style="font-family: 'Times New Roman', Times, serif; color: #333;">
+                      <i class="fas fa-home text-primary"></i> Home
+                  </a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link fw-bold" href="callforpaper.html" 
+                     style="font-family: 'Times New Roman', Times, serif; color: #333;">
+                      <i class="fas fa-file-alt text-success"></i> Call for Papers
+                  </a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link fw-bold" href="regisration.html" 
+                     style="font-family: 'Times New Roman', Times, serif; color: #333;">
+                      <i class="fas fa-clipboard-list text-danger"></i> Registration
+                  </a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link fw-bold" href="publicationhome.html" 
+                     style="font-family: 'Times New Roman', Times, serif; color: #333;">
+                      <i class="fas fa-book text-warning"></i> Publication
+                  </a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link fw-bold" href="commitee.html" 
+                     style="font-family: 'Times New Roman', Times, serif; color: #333;">
+                      <i class="fas fa-users text-info"></i> Committee
+                  </a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link fw-bold" href="venue.html" 
+                     style="font-family: 'Times New Roman', Times, serif; color: #333;">
+                      <i class="fas fa-map-marker-alt text-secondary"></i> Venue & Accommodation
+                  </a>
+              </li>
+              <!-- Login Dropdown -->
+              <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle fw-bold" href="#" id="loginDropdown" role="button" data-bs-toggle="dropdown"
+                     style="font-family: 'Times New Roman', Times, serif; color: #333;">
+                      <i class="fas fa-sign-in-alt"></i> Login
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="loginDropdown">
+                      <li>
+                          <a class="dropdown-item" href="author1login.html">
+                              <i class="fas fa-user text-success"></i> Author Login
+                          </a>
+                      </li>
+                      <li>
+                          <a class="dropdown-item" href="admin1login.html">
+                              <i class="fas fa-user-shield text-danger"></i> Admin Login
+                          </a>
+                      </li>
+                      <li>
+                          <a class="dropdown-item" href="rewier1login.html">
+                              <i class="fas fa-user-check text-info"></i> Reviewer Login
+                          </a>
+                      </li>
+                  </ul>
+              </li>
+          </ul>
+      </div>
+  </div>
+</nav>
+<!-- Bootstrap JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+
+<!-- Custom Media Queries -->
+<style>
+/* Default size */
+.custom-navbar {
+    background-color: #D3D3D3 !important;
+}
+
+/* Default size */
+
+
+/* Hover effect for nav links */
+.nav-link:hover {
+    color: black !important;
+}
+
+/* Medium devices (tablets) */
+.custom-logo {
+        height: 150px; /* Default size for larger screens */
+        width: auto;
+        object-fit: contain;
+        padding-top: 50px;
+    }
+
+    @media (max-width: 992px) {
+    .custom-logo {
+        height: 120px;
+    }
+    
+}
+
+
+/* Small devices (phones) */
+@media (max-width: 768px) {
+    .custom-logo {
+        height: 100px;
+    }
+}
+
+/* Extra small devices (very small phones) */
+@media (max-width: 576px) {
+    .custom-logo {
+        height: 80px;
+    }
+}
+</style>
+

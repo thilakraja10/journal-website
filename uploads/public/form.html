@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download Form</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="text-center">Fill in your details to download the PDF</h2>
+        <form id="downloadForm">
+            <input type="hidden" id="pdfFile" name="pdfFile" value="">
+    
+            <!-- Name Field -->
+            <div class="mb-3">
+                <label for="name" class="form-label">Name:</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-person-fill icon-blue"></i></span>
+                    <input type="text" id="name" name="name" class="form-control" required>
+                </div>
+            </div>
+    
+            <!-- Email Field (Only @gmail.com) -->
+            <div class="mb-3">
+                <label for="email" class="form-label">Email:</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-envelope-fill icon-green"></i></span>
+                    <input type="email" id="email" name="email" class="form-control" required>
+                </div>
+                <div class="text-danger" id="emailError" style="display: none;">Only @gmail.com emails are allowed.</div>
+            </div>
+    
+            <!-- Phone Number Field (Only 10 Digits) -->
+            <div class="mb-3">
+                <label for="phone" class="form-label">Phone:</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-telephone-fill icon-red"></i></span>
+                    <input type="tel" id="phone" name="phone" class="form-control" pattern="\d{10}" maxlength="10" required>
+                </div>
+                <div class="text-danger" id="phoneError" style="display: none;">Phone number must be exactly 10 digits.</div>
+            </div>
+    
+            <!-- Feedback Field -->
+            <div class="mb-3">
+                <label for="message" class="form-label">Feedback:</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-chat-left-text-fill icon-purple"></i></span>
+                    <textarea id="message" name="message" class="form-control" rows="4" required></textarea>
+                </div>
+            </div>
+    
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-primary w-100">Submit & Download</button>
+        </form>
+    </div>
+    
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+   
+    
+<style>
+    .input-group-text {
+            background-color: white !important; /* White background */
+            border-right: none;
+        }
+        .form-control {
+            border-left: none;
+        }
+        
+        /* Icon colors */
+        .icon-blue { color: #007bff; }   /* Blue */
+        .icon-green { color: #28a745; }  /* Green */
+        .icon-red { color: #dc3545; }    /* Red */
+        .icon-purple { color: #6f42c1; } /* Purple */
+</style>
+<script>
+   document.addEventListener("DOMContentLoaded", function () {
+    // Extract the PDF file name from the URL parameter
+    const urlParams = new URLSearchParams(window.location.search);
+    const pdfFile = urlParams.get("file");
+
+    if (pdfFile) {
+        document.getElementById("pdfFile").value = pdfFile; // Display file name in input (if needed)
+    }
+
+    // Handle form submission
+    document.getElementById("downloadForm").addEventListener("submit", function (event) {
+        event.preventDefault(); // Prevent page refresh
+
+        // Collect form data
+        const name = document.getElementById("name").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const phone = document.getElementById("phone").value.trim();
+        const message = document.getElementById("message").value.trim();
+
+        if (name && email) {
+            alert("Form submitted successfully! Your download will start shortly.");
+            downloadPDF(pdfFile); // Call function to find and download the PDF
+        } else {
+            alert("Please fill in all the fields.");
+        }
+    });
+});
+
+// Function to find and download the PDF file from the correct folder
+function downloadPDF(pdfFile) {
+    const folders = [
+        "vol_1_issue_1_2019",
+        "vol_1_issue_2_2019",
+        "vol_2_issue_1_2020",
+        "vol_2_issue_2_2020",
+        "vol_3_issue_1_2021",
+        "vol_3_issue_2_2021",
+        "vol_4_issue_1_2022",
+        "vol_4_issue_2_2022",
+        "vol_5_issue_1_2023",
+        "vol_5_issue_2_2023",
+        "vol_6_issue_1_2024",
+        "vol_6_issue_2_2024",
+        "vol_7_issue_1_2025"
+    ];
+
+    let found = false; // Track if the file is found
+
+    function checkFile(index) {
+        if (index >= folders.length) {
+            alert("Sorry, the requested file could not be found.");
+            return;
+        }
+
+        let filePath = `http://127.0.0.1:3001/files/${folders[index]}/${pdfFile}`;
+
+        fetch(filePath, { method: "HEAD" })
+            .then(response => {
+                if (response.ok) {
+                    found = true;
+                    window.location.href = filePath; // Redirect to the found file
+                } else {
+                    checkFile(index + 1); // Check next folder
+                }
+            })
+            .catch(error => checkFile(index + 1)); // Move to next folder if an error occurs
+    }
+
+    checkFile(0); // Start checking from the first folder
+}
+
+document.getElementById("downloadForm").addEventListener("submit", function(event) {
+        let email = document.getElementById("email").value;
+        let phone = document.getElementById("phone").value;
+        let emailError = document.getElementById("emailError");
+        let phoneError = document.getElementById("phoneError");
+
+        emailError.style.display = "none";
+        phoneError.style.display = "none";
+
+        // Email validation (@gmail.com only)
+        if (!email.endsWith("@gmail.com")) {
+            emailError.style.display = "block";
+            event.preventDefault(); // Prevent form submission
+        }
+
+        // Phone number validation (10 digits only)
+        if (!/^\d{10}$/.test(phone)) {
+            phoneError.style.display = "block";
+            event.preventDefault();
+        }
+    });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
