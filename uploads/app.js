@@ -339,8 +339,8 @@ app.post("/forgot-password", (req, res) => {
         const transporter = nodemailer.createTransport({
             service: "gmail",
             auth: {
-                user: "thilakraja10@gmail.com", // Replace with your email
-                pass: "tdai putr abny luxc" 
+                user: "your email id", // Replace with your email
+                pass: "app pass " 
             }
         });
 
@@ -459,8 +459,8 @@ app.post("/submit", upload1.single("file"), async (req, res) => {
             const transporter = nodemailer.createTransport({
                 service: 'gmail',
                 auth: {
-                    user: 'thilakraja10@gmail.com',       // 🔁 Replace with your Gmail
-                    pass: 'tunw uvnn dujq khds'           // 🔁 Replace with your Gmail App Password
+                   user: "your email id", // Replace with your email
+                pass: "app pass " '           // 🔁 Replace with your Gmail App Password
                 }
             });
 
@@ -592,8 +592,8 @@ app.get("/get-reviewers", (req, res) => {
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-        user: "thilakraja10@gmail.com", // Replace with your email
-        pass: "tdai putr abny luxc" 
+        user: "your email id", // Replace with your email
+                pass: "app pass " 
     }
 });
 
@@ -702,8 +702,8 @@ app.delete("/delete-reviewer/:id", (req, res) => {
 //         let transporter = nodemailer.createTransport({
 //             service: 'gmail', // You can use other services like Outlook, SendGrid, etc.
 //             auth: {
-//                 user: "thilakraja10@gmail.com", // Replace with your email
-//                 pass: "tdai putr abny luxc" // App password (if 2FA is enabled)
+//                 user: "your email id", // Replace with your email
+                pass: "app pass " 
 //             }
 //         });
 
@@ -779,8 +779,8 @@ app.post('/assign-reviewer', async (req, res) => {
         const transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
-                user: 'thilakraja10@gmail.com', // Your Gmail
-                pass: 'tdai putr abny luxc'      // App Password
+              user: "your email id", // Replace with your email
+                pass: "app pass " 
             }
         });
 
@@ -1149,8 +1149,8 @@ app.post("/forgot-password-1", (req, res) => {
         const transporter = nodemailer.createTransport({
             service: "gmail",
             auth: {
-                user: "thilakraja10@gmail.com", // Replace with your email
-                pass: "tdai putr abny luxc" 
+                user: "your email id", // Replace with your email
+                pass: "app pass " 
             }
         });
 
@@ -1297,8 +1297,8 @@ app.post("/submit_1", upload2.single("file"), async (req, res) => {
             const transporter = nodemailer.createTransport({
                 service: 'gmail',
                 auth: {
-                    user: 'thilakraja10@gmail.com',       // 🔁 Replace with your Gmail
-                    pass: 'tunw uvnn dujq khds'           // 🔁 Replace with your Gmail App Password
+                user: "your email id", // Replace with your email
+                pass: "app pass "           // 🔁 Replace with your Gmail App Password
                 }
             });
 
@@ -1478,8 +1478,8 @@ app.post("/add-reviewer_1", (req, res) => {
         const transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
-                user: "thilakraja10@gmail.com", // Replace with your email
-                pass: "tdai putr abny luxc"  // ✅ Securely use environment variable
+                user: "your email id", // Replace with your email
+                pass: "app pass "  // ✅ Securely use environment variable
             }
         });
 
@@ -1569,8 +1569,8 @@ app.delete("/delete-reviewer_1/:id", (req, res) => {
 //         let transporter = nodemailer.createTransport({
 //             service: 'gmail', // You can use other services like Outlook, SendGrid, etc.
 //             auth: {
-//                 user: "thilakraja10@gmail.com", // Replace with your email
-//                 pass: "tdai putr abny luxc" // App password (if 2FA is enabled)
+//                 user: "your email id", // Replace with your email
+                pass: "app pass "  // App password (if 2FA is enabled)
 //             }
 //         });
 
@@ -1646,8 +1646,8 @@ app.post('/assign-reviewer', async (req, res) => {
         const transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
-                user: 'thilakraja10@gmail.com', // Your Gmail
-                pass: 'tdai putr abny luxc'      // App Password
+               user: "your email id", // Replace with your email
+                pass: "app pass "       // App Password
             }
         });
 
@@ -2315,8 +2315,8 @@ app.post("/api/update-status", async (req, res) => {
         const transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
-                user: 'thilakraja10@gmail.com',
-                pass: 'tdai putr abny luxc'
+                user: "your email id", // Replace with your email
+                pass: "app pass " 
             }
         });
 
@@ -2388,8 +2388,8 @@ app.post("/api/update-status_1", async (req, res) => {
         const transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
-                user: 'thilakraja10@gmail.com',     // your Gmail
-                pass: 'tdai putr abny luxc'          // your App password
+                user: "your email id", // Replace with your email
+                pass: "app pass "           // your App password
             }
         });
 
@@ -2652,8 +2652,8 @@ app.put("/publish/:id", async (req, res) => {
         const transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
-                user: "thilakraja10@gmail.com",
-                pass: "tdai putr abny luxc" // Replace with Gmail App Password
+                user: "your email id", // Replace with your email
+                pass: "app pass "  // Replace with Gmail App Password
             }
         });
 
@@ -2797,8 +2797,8 @@ app.put("/publish_1/:id", async (req, res) => {
       const transporter = nodemailer.createTransport({
         service: "gmail",
         auth: {
-          user: "thilakraja10@gmail.com",         // ✅ Replace with your Gmail
-          pass: "tdai putr abny luxc"               // ✅ Replace with your Gmail App Password
+          user: "your email id", // Replace with your email
+                pass: "app pass "               // ✅ Replace with your Gmail App Password
         }
       });
   
